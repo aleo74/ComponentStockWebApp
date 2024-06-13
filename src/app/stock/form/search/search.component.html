@@ -1,0 +1,19 @@
+<div class="flex justify-center">
+  <div class="w-full max-w-lg">
+    <div class="bg-white rounded-lg p-6">
+      <div class="mb-4">
+        <input #searchBox (keyup)="onSearchChange(searchBox.value)"
+          placeholder="Rechercher" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+      </div>
+
+      <div *ngIf="searchTerm.length >= 3">
+        <div class="divide-y divide-gray-200">
+          <a *ngFor="let stock of filteredStocks"
+            (click)="gotToDetail(stock)" class="block p-4 hover:bg-gray-100 cursor-pointer">
+            {{ stock.name }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

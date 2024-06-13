@@ -1,0 +1,15 @@
+<div *ngIf="!loading && tagList && tagList.length; else noTags">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div *ngFor="let tag of tagList">
+      <div (click)="selectTag(tag)"  class="bg-white shadow-md rounded-lg p-4" appBorderCard="{{tag.color}}">
+        <h2 class="text-xl font-semibold">{{ tag.name }}</h2>
+        <p class="text-gray-700">color: {{ tag.color }}</p>
+        <p class="text-gray-700">Description: {{ tag.description }}</p>
+      </div>
+  </div>
+  </div>
+</div>
+<app-button-tag></app-button-tag>
+<ng-template #noTags>
+  <p class="text-red-500">No tags available.</p>
+</ng-template>

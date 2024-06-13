@@ -1,0 +1,32 @@
+<div class="flex justify-center">
+  <app-loader *ngIf="loading"></app-loader>
+  <div *ngIf="!loading && stock; else noStocks" class="w-full max-w-lg">
+    <div class="gap-4">
+      <div class="bg-white shadow-md rounded-lg p-4">
+        <div *ngIf="imageUrl" class="flex justify-center mb-4">
+          <img [src]="imageUrl" alt="Image" class="w-auto h-96 rounded"/>
+        </div>
+        <h2 class="text-xl font-semibold">{{ stock.name }}</h2>
+        <p class="text-gray-700">Quantity: {{ stock.qty }}</p>
+        <p class="text-gray-700">Description: {{ stock.description }}</p>
+        <p class="text-gray-700">Creation date: {{ stock.created_at | date:"dd/MM/yyyy" }}</p>
+        <p class="text-gray-700">last update: {{ stock.updated_at | date:"dd/MM/yyyy"}}</p>
+        <span *ngFor="let tags of stock.tags"
+        [ngStyle]="{'background-color': tags.color, 'color': getTextColor(tags.color)}"
+        class="inline-block rounded px-3 py-1 m-1 text-sm font-semibold"
+        >
+          {{ tags.name }}
+        </span>
+      </div>
+    </div>
+    <div class="mt-3 flex justify-center">
+      <button class="bg-blue-500 hover:bg-blue-600 text-gray-800 font-semibold py-2 px-4  rounded shadow mr-5" (click)="editStock(stock._id)">Edit</button>
+      <button class="bg-red-500 hover:bg-red-600 text-gray-800 font-semibold py-2 px-4 rounded shadow mr-5" (click)="deleteStock()">Delete</button>
+      <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded shadow" routerLink="/">{{ 'PAGES.DETAIL.BACK_TO_HOME' | translate }}</button>
+    </div>
+  </div>
+
+  <ng-template #noStocks>
+    <p class="text-red-500">No tags found.</p>
+  </ng-template>
+</div>

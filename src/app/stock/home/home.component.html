@@ -1,0 +1,25 @@
+<app-loader *ngIf="loading"></app-loader>
+<app-search></app-search>
+<div *ngIf="!loading && stockList && stockList.length; else noStocks">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div *ngFor="let stock of stockList">
+      <div (click)="selectStock(stock)"  class="bg-white shadow-md rounded-lg p-4" appBorderCard>
+        <h2 class="text-xl font-semibold">{{ stock.name }}</h2>
+        <p class="text-gray-700">Quantity: {{ stock.qty }}</p>
+        <p class="text-gray-700">Description: {{ stock.description | truncate:50 }}</p>
+        <span *ngFor="let tags of stock.tags"
+        [ngStyle]="{'background-color': tags.color, 'color': getTextColor(tags.color)}"
+        class="inline-block rounded px-3 py-1 m-1 text-sm font-semibold"
+        >
+          {{ tags.name }}
+        </span>
+      </div>
+  </div>
+  </div>
+</div>
+<app-button></app-button>
+
+<ng-template #noStocks>
+  <p class="text-red-500">No stocks available.</p>
+</ng-template>
+

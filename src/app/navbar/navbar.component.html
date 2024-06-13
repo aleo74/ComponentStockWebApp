@@ -1,0 +1,5 @@
+<div class="space-x-2" style="-webkit-app-region: no-drag;">
+    <button onclick="" (click)="goConfig()" class="bg-gray-700 text-white px-4 py-2 rounded">Configurations</button>
+    <button *ngIf="islogged" (click)="logout()">Logout</button>
+    <button *ngIf="isElectron()" (click)="close()">X</button>
+</div>
